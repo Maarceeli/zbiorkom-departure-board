@@ -18,7 +18,7 @@ jobs:
       - name: HACS Action
         uses: hacs/action@main
         with:
-          category: dashboard
+          category: plugin
 
   validate-hassfest:
     runs-on: ubuntu-latest
