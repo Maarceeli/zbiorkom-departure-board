@@ -148,6 +148,12 @@ class DepartureBoardCard extends HTMLElement {
   _formatMinutes(minutes) {
     if (minutes <= 0) return "Teraz";
     if (minutes === 1) return "1 min";
+    if (minutes >= 60) {
+      const hours = Math.floor(minutes / 60);
+      const mins = minutes % 60;
+      if (mins === 0) return `${hours} h`;
+      return `${hours} h ${mins} min`;
+    }
     return `${minutes} min`;
   }
 
@@ -158,7 +164,11 @@ class DepartureBoardCard extends HTMLElement {
   }
 
   _formatTime(date) {
-    return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    return date.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    });
   }
 
   getCardSize() {
@@ -358,9 +368,9 @@ class DepartureBoardCard extends HTMLElement {
     const minutesClass = minutes === 0 ? "now" : minutes <= 3 ? "soon" : "";
 
     const realtimeDotClass = !dep.is_realtime
-      ? "planowo"
+      ? "scheduled"
       : dep.is_delayed
-        ? "opóźniony"
+        ? "delayed"
         : "";
 
     const realtimeText = !dep.is_realtime
