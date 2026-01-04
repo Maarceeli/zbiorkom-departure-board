@@ -112,7 +112,7 @@ class DepartureBoardCard extends HTMLElement {
       stop_id: stopData[0],
       city: stopData[1],
       name: stopData[2],
-      full_name: stopData[8] || stopData[2],
+      full_name: stopData[2],
       coordinates: stopData[3],
     };
 
@@ -132,14 +132,14 @@ class DepartureBoardCard extends HTMLElement {
         trip_id: dep[0],
         destination: dep[1],
         line: {
-          number: lineInfo[0],
+          number: lineInfo[2],
           color: lineInfo[5] || "#44739e",
         },
         scheduled_time: scheduledTime,
         actual_time: actualTime,
         delay_seconds: delaySeconds,
         is_realtime: isRealtime,
-        is_delayed: isRealtime && delaySeconds > 60,
+        is_delayed: isRealtime && delaySeconds > 120,
         vehicle_id: dep[5] || null,
       };
     });
